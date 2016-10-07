@@ -5,16 +5,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Demo: <%= capitalizeName %></title>
 
-	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-	<link rel="stylesheet" href="../build/<%= kebabCaseName %>.css">
+	<link rel="stylesheet" href="../node_modules/lexicon-ux/build/css/atlas-font-awesome.css">
 
 	<script src="../build/globals/<%= kebabCaseName %>.js"></script>
+
+	<style>
+		body {
+			padding: 10px;
+		}
+	</style>
 </head>
 <body>
 	<h1><%= capitalizeName %></h1>
 
+	<div id="<%= camelCaseName %>"></div>
+
 	<script type="text/javascript">
-		new metal.<%= capCaseName %>();
+		new metal.<%= capCaseName %>({}, '#<%= camelCaseName%>');
 	</script>
 </body>
 </html>

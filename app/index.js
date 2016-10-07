@@ -8,7 +8,8 @@ var yosay  = require('yosay');
 module.exports = yeoman.generators.Base.extend({
 	initializing: function () {
 		this.log(yosay(
-			'Welcome, let\'s generate a ' + chalk.blue('Metal') + ' project!'
+			'Welcome, let\'s generate a ' + chalk.blue('Metal Lexicon') +
+			' component!'
 		));
 	},
 
@@ -18,17 +19,17 @@ module.exports = yeoman.generators.Base.extend({
 		var prompts = [{
 			type: 'input',
 			name: 'componentName',
-			message: 'How do you want to name your class?',
+			message: 'How do you want to name your component?',
 			default: 'Select Input',
 			validate: function(input) {
 				if (!input) {
-					return 'You must provide a class name. Names should be capitalized ' +
-					'and separated by spaces.';
+					return 'You must provide a component name. Names should ' +
+					'be capitalized and separated by spaces.';
 				}
-				if (!/^[^_\-\s\d][^_\-\s]*$/.test(input)) {
-					return 'Invalid component name. Component names can\'t contain any ' +
-					'of the following characters: "-_". Also, class names can\'t ' +
-					'start with digits.';
+				if (!/^[^_\-\s\d](?:[^_\-\s]| )*$/.test(input)) {
+					return 'Invalid component name. Component names can\'t ' +
+					'contain any of the following characters: "-_". Also, ' +
+					'class names can\'t start with digits.';
 				}
 
 				return true;
@@ -56,7 +57,7 @@ module.exports = yeoman.generators.Base.extend({
 			name: 'buildFormat',
 			message: 'Which build format will this component use?',
 			choices: ['globals', 'jquery', 'amd'],
-			default: 'globals',
+			default: 'amd',
 			validate: function(input) {
 				if (!input) {
 					return 'You must provide the Metal component build format.';
@@ -68,19 +69,22 @@ module.exports = yeoman.generators.Base.extend({
 		{
 			type: 'confirm',
 			name: 'isNodeModule',
-			message: 'Is this component supposed to run on node environment? (that is, should other modules be able to "require" and use it?)',
-			default: false
+			message: 'Is this component supposed to run on node environment? ' +
+			'(that is, should other modules be able to "require" and use it?)'
 		},
 		{
 			type: 'confirm',
 			name: 'defaultKarmaConfig',
-			message: 'Do you want to use the default karma configuration? (if so, the karma.conf.js file won\'t be generated, since the gulp tasks will handle the config)'
+			message: 'Do you want to use the default karma configuration? ' +
+			'(if so, the karma.conf.js file won\'t be generated, since the ' +
+			'gulp tasks will handle the config)',
+			default: false
 		},
 		{
 			type: 'input',
 			name: 'repoOwner',
 			message: 'What\'s the GitHub username?',
-			default: 'my-user',
+			default: 'liferay-lexicon',
 			validate: function(input) {
 				if (!input) {
 					return 'You must provide a GitHub username.';
@@ -88,12 +92,6 @@ module.exports = yeoman.generators.Base.extend({
 
 				return true;
 			}
-		},
-		{
-			type: 'input',
-			name: 'repoDescription',
-			message: 'How would you describe this project?',
-			default: 'My awesome Metal.js project'
 		}];
 
 		this.prompt(prompts, function (props) {
@@ -106,9 +104,9 @@ module.exports = yeoman.generators.Base.extend({
 
 			this.defaultKarmaConfig = props.defaultKarmaConfig;
 			this.isNodeModule = props.isNodeModule;
-			this.repoName = 'metal-' + this.kebabCaseName;
+			this.repoName = 'lexicon-' + this.kebabCaseName;
 			this.repoOwner = props.repoOwner;
-			this.repoDescription = props.repoDescription;
+			this.repoDescription = 'Lexicon ' + this.capitalizeName + ' Component';
 			this.buildFormat = props.buildFormat;
 			this.superClass = props.superClass;
 			this.templateLanguage = props.templateLanguage || 'None';

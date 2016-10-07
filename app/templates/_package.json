@@ -34,8 +34,7 @@
 		"metal-state": "^2.0.0"
 	},<% } else if (superClass === 'Component') { %>
 	"dependencies": {
-		"bootstrap": "^3.3.6"<% if (templateLanguage === 'Soy') { %>,
-		"metal-soy": "^2.0.0"<% } else if (templateLanguage === 'JSX') { %>,
+		<% if (templateLanguage === 'Soy') { %>"metal-soy": "^2.0.0"<% } else if (templateLanguage === 'JSX') { %>,
 		"metal-jsx": "^2.0.0"<% } else { %>,
 		"metal-component": "^2.0.0"<% } %>
 	},<% } else { %>
@@ -61,6 +60,7 @@
 		"karma-mocha": "^0.2.0",
 		"karma-source-map-support": "1.0.0",
 		"karma-html2js-preprocessor": "^1.0.0",
+		"lexicon-ux": "^1.0.0",
 		"metal-karma-config": "^2.1.1",
 		"mocha": "^2.2.5"<% } %><% if (buildFormat === 'amd') { %>,
 		"requirejs": "^2.1.0"<% } %>
